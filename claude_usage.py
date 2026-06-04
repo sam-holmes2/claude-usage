@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 # <xbar.title>Claude Usage</xbar.title>
-# <xbar.version>v1.0</xbar.version>
+# <xbar.version>v1.1</xbar.version>
 # <xbar.author>Sam Holmes</xbar.author>
 # <xbar.desc>Shows Claude.ai 5-hour and 7-day usage from menu bar</xbar.desc>
+# <xbar.schedule>* * * * *</xbar.schedule>
 # <xbar.refreshOnOpen>true</xbar.refreshOnOpen>
 
 import json

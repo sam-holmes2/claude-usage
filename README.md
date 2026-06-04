@@ -1,38 +1,41 @@
 # claude-usage
 
-xbar plugin showing Claude.ai 5-hour and 7-day usage in the macOS menu bar.
+xbar plugin showing your Claude.ai 5-hour and 7-day usage in the macOS menu bar.
+
+![menu bar showing ⚡ 28% (3h 11m) · 18% (3d) in green](screenshot.png)
 
 ## Setup
 
-1. Install xbar: https://xbarapp.com
-2. Open xbar, go to Plugin Browser or open the plugins folder directly
-3. Symlink or copy `claude_usage.5m.py` into your xbar plugins folder:
+1. Install [xbar](https://xbarapp.com)
+2. Copy `claude_usage.5m.py` to your xbar plugins folder:
+   ```bash
+   cp claude_usage.5m.py ~/Library/Application\ Support/xbar/plugins/
+   chmod +x ~/Library/Application\ Support/xbar/plugins/claude_usage.5m.py
    ```
-   ln -s "$(pwd)/claude_usage.5m.py" ~/Library/Application\ Support/xbar/plugins/claude_usage.5m.py
+3. Create your config file:
+   ```bash
+   mkdir -p ~/.claude-usage
+   cp config.example.json ~/.claude-usage/config.json
    ```
-4. Make it executable:
-   ```
-   chmod +x claude_usage.5m.py
-   ```
-5. Edit `config.json` and paste your `sessionKey` cookie value (from Firefox DevTools on claude.ai)
-6. Refresh xbar
-
-## Updating the session key
-
-If the plugin shows a red warning (session expired):
-1. Open Firefox, go to claude.ai
-2. DevTools (F12) > Storage > Cookies > claude.ai
-3. Copy the value of `sessionKey`
-4. Paste into `config.json`
-
-The session key typically lasts months. You should rarely need to do this.
+4. Get your session key:
+   - Open claude.ai in Firefox
+   - DevTools (F12) > Storage > Cookies > claude.ai
+   - Copy the value of `sessionKey`
+   - Paste it into `~/.claude-usage/config.json`
+5. Refresh xbar
 
 ## What it shows
 
-`⚡ 20% · 17%` in the menu bar (5-hour % · 7-day %)
+`⚡ 28% (3h 11m) · 18% (3d)` in green by default, turning orange above 50% and red above 80% (based on the 5-hour window).
 
-Colour: green below 50%, orange above 50%, red above 80% (based on 5-hour window).
+Click the menu bar item for a usage bar and exact reset times.
 
-Dropdown shows a usage bar for each limit plus time until reset.
+Refreshes every 5 minutes.
 
-Refreshes every 5 minutes (the `.5m.` in the filename controls this).
+## Updating the session key
+
+The session key typically lasts months. If you see a red warning, just grab a fresh one from DevTools and update `~/.claude-usage/config.json`.
+
+## Note
+
+This uses an undocumented internal Claude.ai endpoint. It may break if Anthropic changes their API. No data leaves your machine beyond the request to claude.ai itself.
